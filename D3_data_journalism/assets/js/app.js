@@ -21,7 +21,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 d3.csv("assets/data/data.csv").then(function(stateData) {
-    console.log(stateData);
+    // console.log(stateData);
 
     // Step 1: Parse Data/Cast as numbers
     // ==============================
@@ -65,35 +65,19 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
     .attr("fill", "lightblue")
-    .attr("text-anchor", "middle")
-    .attr("label", d => d.abbr )
-    .style("font-color", "black")
-    .attr("opacity", "0.5")
-    // .html(function(d) {
-    //     return (`${d.abbr}`);
-    //   });
-    // .html(function(d) {
-    //     return (`${d.abbr}`);
-    //   });
+    .attr("opacity", "1")
 
-    // Step 6: Initialize tool tip
-    // ==============================
-    // var toolTip = d3.tip()
-    //   .attr("class", "tooltip")
-    //   .html(function(d) {
-    //     return (`${d.abbr}`);
-    //   });
-
-    // // Step 7: Create tooltip in the chart
-    // // ==============================
-    // chartGroup.call(toolTip);
-
-    // // Step 8: Create event listeners to display and hide the tooltip
-    // // ==============================
-    // circlesGroup.on("mouseout", function(data) {
-    //     toolTip.show(data, this);
-    // })
-
+    chartGroup.selectAll("text")
+    .data(stateData)
+    .enter()
+    .append("text")
+    .attr("x", d => xLinearScale(d.poverty))
+    .attr("y", d => yLinearScale(d.healthcare))
+    .text(d => d.abbr)
+    .style("text-anchor", "middle")
+    .style("fill", "red")
+    .style("font-family", "Arial")
+    .style("font-size", 12);
 
 
     // Create axes labels
