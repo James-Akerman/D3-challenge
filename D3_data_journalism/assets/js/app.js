@@ -1,5 +1,5 @@
-var svgWidth = 960;
-var svgHeight = 500;
+var svgWidth = 1000;
+var svgHeight = 600;
 
 var margin = {
   top: 20,
@@ -38,7 +38,7 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(stateData, d => d.healthcare)])
+      .domain([4, d3.max(stateData, d => d.healthcare)])
       .range([height, 0]);
 
     // Step 3: Create axis functions
@@ -66,8 +66,10 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     .attr("r", "15")
     .attr("fill", "lightblue")
     .attr("opacity", "1")
+    .style("stroke", "white")
 
-    chartGroup.selectAll("text")
+    // Add label to each circle
+    chartGroup.selectAll("textCircle")
     .data(stateData)
     .enter()
     .append("text")
