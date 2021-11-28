@@ -1,11 +1,11 @@
 var svgWidth = 1000;
-var svgHeight = 600;
+var svgHeight = 800;
 
 var margin = {
   top: 20,
   right: 40,
   bottom: 60,
-  left: 100
+  left: 60
 };
 
 var width = svgWidth - margin.left - margin.right;
@@ -21,24 +21,21 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 d3.csv("assets/data/data.csv").then(function(stateData) {
-    // console.log(stateData);
-
     // Step 1: Parse Data/Cast as numbers
     // ==============================
     stateData.forEach(function(data) {
         data.healthcare = +data.healthcare;
         data.poverty = +data.poverty;
       });
-
     
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([8, d3.max(stateData, d => d.poverty)])
+      .domain([8, d3.max(stateData, d => d.poverty) + 2])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-      .domain([4, d3.max(stateData, d => d.healthcare)])
+      .domain([4, d3.max(stateData, d => d.healthcare) + 2])
       .range([height, 0]);
 
     // Step 3: Create axis functions
@@ -64,9 +61,9 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
-    .attr("fill", "lightblue")
+    .attr("fill", "#03a5fc")
     .attr("opacity", "1")
-    .style("stroke", "white")
+    .style("stroke", "white");
 
     // Add label to each circle
     chartGroup.selectAll("textCircle")
@@ -77,24 +74,27 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     .attr("y", d => yLinearScale(d.healthcare))
     .text(d => d.abbr)
     .style("text-anchor", "middle")
-    .style("fill", "red")
+    .style("fill", "white")
     .style("font-family", "Arial")
-    .style("font-size", 12);
+    .style("font-weight", "bold")
+    .style("font-size", "14px");
 
 
     // Create axes labels
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left + 40)
+      .attr("y", 0 - margin.left)
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .attr("class", "axisText")
-      .text("Lack of Healthcare %");
+      .text("Lack of Healthcare %")
+      .style("font-weight", "bold");
 
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("In Poverty %");
+      .text("In Poverty %")
+      .style("font-weight", "bold");
 }).catch(function(error) {
     console.log(error);
   });
