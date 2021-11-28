@@ -1,9 +1,11 @@
-var svgWidth = 1000;
+var svgWidth = 1200;
 var svgHeight = 800;
+// var svgWidth = 3000;
+// var svgHeight = 5000;
 
 var margin = {
   top: 20,
-  right: 40,
+  right: 20,
   bottom: 60,
   left: 60
 };
@@ -37,6 +39,7 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     var yLinearScale = d3.scaleLinear()
       .domain([4, d3.max(stateData, d => d.healthcare) + 2])
       .range([height, 0]);
+      
 
     // Step 3: Create axis functions
     // ==============================
@@ -84,16 +87,16 @@ d3.csv("assets/data/data.csv").then(function(stateData) {
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left)
-      .attr("x", 0 - (height / 2))
+      .attr("x", 0 - (height / 1.75))
       .attr("dy", "1em")
       .attr("class", "axisText")
-      .text("Lack of Healthcare %")
+      .text("Lack of Healthcare (%)")
       .style("font-weight", "bold");
 
     chartGroup.append("text")
-      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+      .attr("transform", `translate(${width / 1.85}, ${height + margin.top + 20})`)
       .attr("class", "axisText")
-      .text("In Poverty %")
+      .text("In Poverty (%)")
       .style("font-weight", "bold");
 }).catch(function(error) {
     console.log(error);
