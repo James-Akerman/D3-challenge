@@ -32,7 +32,7 @@ function xScale(stateData, chosenXAxis) {
   // create scales
   var xLinearScale = d3.scaleLinear()
     .domain([d3.min(stateData, d => d[chosenXAxis]) * 0.8,
-      d3.max(stateData, d => d[chosenXAxis]) * 1.2
+      d3.max(stateData, d => d[chosenXAxis]) * 1.1
     ])
     .range([0, width]);
 
@@ -45,8 +45,10 @@ function xScale(stateData, chosenXAxis) {
 function yScale(stateData, chosenYAxis) {
   // create scales
   var yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(stateData, d => d[chosenYAxis])])
-    .range([height, 0]);
+    .domain([d3.min(stateData, d => d[chosenYAxis]) * 0.8,
+    d3.max(stateData, d => d[chosenYAxis]) * 1.1
+  ])
+  .range([height, 0]);
 
   return yLinearScale;
 
@@ -120,7 +122,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, textGroup) {
   if (chosenYAxis === "healthcare") {
     ylabel = "Lacks Healthcare: ";
   }
-  else if (chosenYAxis === "obese") {
+  else if (chosenYAxis === "obesity") {
     ylabel = "Obesity: ";
   }
   else if (chosenYAxis === "smokes")  {
@@ -170,8 +172,12 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
 
   // parse data
   stateData.forEach(function(data) {
-    data.healthcare = +data.healthcare;
     data.poverty = +data.poverty;
+    data.age = +data.age;
+    data.smokes = +data.smokes;
+    data.healthcare = +data.healthcare;
+    data.smokes = +data.smokes;
+    data.obesity = +data.obesity;
   });
   
 
@@ -360,15 +366,6 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
 
       // replaces chosenXAxis with value
       chosenYAxis = value;
-
-      console.log(chosenYAxis)
-
-      // functions here found above csv import
-      // updates x scale for new data
-      // xLinearScale = xScale(stateData, chosenXAxis);
-
-      // // updates x axis with transition
-      // xAxis = renderAxes(xLinearScale, xAxis);
 
       // updates y scale for new data
       yLinearScale = yScale(stateData, chosenYAxis);
