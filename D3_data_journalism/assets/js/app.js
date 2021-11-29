@@ -4,7 +4,7 @@ var svgHeight = 800;
 var margin = {
   top: 20,
   right: 20,
-  bottom: 60,
+  bottom: 100,
   left: 60
 };
 
@@ -58,6 +58,17 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis) {
     .attr("cx", d => newXScale(d[chosenXAxis]));
 
   return circlesGroup;
+}
+
+// function used for updating circles text group with a transition to
+// new circles
+function renderText(textGroup, newXScale, chosenXAxis) {
+
+  textGroup.transition()
+    .duration(1000)
+    .attr("x", d => newXScale(d[chosenXAxis]));
+
+  return textGroup;
 }
 
 // function used for updating circles group with new tooltip
@@ -138,7 +149,7 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
     .style("stroke", "white");
 
   // Add label to each circle
-  var textCircle = chartGroup.selectAll("textCircle")
+  var textGroup = chartGroup.selectAll("textCircle")
     .data(stateData)
     .enter()
     .append("text")
@@ -162,12 +173,19 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
     .classed("active", true)
     .text("In Poverty (%)");
 
-  var albumsLabel = labelsGroup.append("text")
+  var ageLabel = labelsGroup.append("text")
     .attr("x", 0)
     .attr("y", 40)
-    .attr("value", "num_albums") // value to grab for event listener
+    .attr("value", "age") // value to grab for event listener
     .classed("inactive", true)
-    .text("# of Albums Released");
+    .text("Age (Median)");
+
+  var incomeLabel = labelsGroup.append("text")
+    .attr("x", 0)
+    .attr("y", 60)
+    .attr("value", "income") // value to grab for event listener
+    .classed("inactive", true)
+    .text("Household Income (Median)");
 
   // append y axis
   chartGroup.append("text")
@@ -191,7 +209,7 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
         // replaces chosenXAxis with value
         chosenXAxis = value;
 
-        // console.log(chosenXAxis)
+        console.log(chosenXAxis);
 
         // functions here found above csv import
         // updates x scale for new data
@@ -203,25 +221,45 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
         // updates circles with new x values
         circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis);
 
+        // updates the text in the circles with new x values
+        textGroup = renderText(textGroup, xLinearScale, chosenXAxis);
+
         // updates tooltips with new info
         circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
 
         // changes classes to change bold text
-        if (chosenXAxis === "num_albums") {
-          albumsLabel
+        if (chosenXAxis === "income") {
+          povertyLabel
+            .classed("active", false)
+            .classed("inactive", true);
+          ageLabel
+            .classed("active", false)
+            .classed("inactive", true);
+          incomeLabel
             .classed("active", true)
             .classed("inactive", false);
-          povertyLabel = labelsGroup.append("text")
+        }
+        else if (chosenXAxis === "age") {
+          povertyLabel
+            .classed("active", false)
+            .classed("inactive", true);
+          ageLabel
+            .classed("active", true)
+            .classed("inactive", false);
+          incomeLabel
             .classed("active", false)
             .classed("inactive", true);
         }
         else {
-          albumsLabel
-            .classed("active", false)
-            .classed("inactive", true);
           povertyLabel
             .classed("active", true)
             .classed("inactive", false);
+          ageLabel
+            .classed("active", false)
+            .classed("inactive", true);
+          incomeLabel
+            .classed("active", false)
+            .classed("inactive", true);
         }
       }
     });
