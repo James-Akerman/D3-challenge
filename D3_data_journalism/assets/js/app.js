@@ -4,8 +4,8 @@ var svgHeight = 800;
 var margin = {
   top: 20,
   right: 20,
-  bottom: 100,
-  left: 80
+  bottom: 120,
+  left: 120
 };
 
 var width = svgWidth - margin.left - margin.right;
@@ -238,23 +238,26 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
 
   var povertyLabel = xLabelsGroup.append("text")
     .attr("x", 0)
-    .attr("y", 20)
+    .attr("y", 25)
     .attr("value", "poverty") // value to grab for event listener
     .classed("active", true)
+    .style("font-weight", "bold")
     .text("In Poverty (%)");
 
   var ageLabel = xLabelsGroup.append("text")
     .attr("x", 0)
-    .attr("y", 40)
+    .attr("y", 50)
     .attr("value", "age") // value to grab for event listener
     .classed("inactive", true)
+    .style("font-weight", "bold")
     .text("Age (Median)");
 
   var incomeLabel = xLabelsGroup.append("text")
     .attr("x", 0)
-    .attr("y", 60)
+    .attr("y", 75)
     .attr("value", "income") // value to grab for event listener
     .classed("inactive", true)
+    .style("font-weight", "bold")
     .text("Household Income (Median)");
 
   // Create group for the y-axis labels
@@ -267,22 +270,25 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
   .attr("dy", "1em")
   .attr("value", "obesity") // value to grab for event listener
   .classed("inactive", true)
+  .style("font-weight", "bold")
   .text("Obese (%)");
 
 var smokesLabel = yLabelsGroup.append("text")
   .attr("y", 0 - margin.left)
   .attr("x", 0 - (height / 2))
-  .attr("dy", "2em")
+  .attr("dy", "2.50em")
   .attr("value", "smokes") // value to grab for event listener
   .classed("inactive", true)
+  .style("font-weight", "bold")
   .text("Smokes (%)");
 
   var healthcareLabel = yLabelsGroup.append("text")
   .attr("y", 0 - margin.left)
   .attr("x", 0 - (height / 2))
-  .attr("dy", "3em")
+  .attr("dy", "4em")
   .attr("value", "healthcare") // value to grab for event listener
   .classed("active", true)
+  .style("font-weight", "bold")
   .text("Lacks Healthcare (%)");
 
 
