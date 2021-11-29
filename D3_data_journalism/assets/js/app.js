@@ -64,8 +64,8 @@ function renderAxes(newXScale, xAxis) {
 }
 
 // function used for updating yAxis var upon click on axis label
-function renderYaxes(newYScale, yAxis) {
-  var yAxis = d3.leftAxis(newYScale);
+function renderYAxes(newYScale, yAxis) {
+  var leftAxis = d3.axisLeft(newYScale);
 
   yAxis.transition()
     .duration(1000)
@@ -159,7 +159,9 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
     .call(bottomAxis);
 
   // append y axis
-  chartGroup.append("g")
+  var yAxis = chartGroup.append("g")
+    // .classed("y-axis", true)
+    // .attr("transform", `translate(0, ${width})`)
     .call(leftAxis);
 
   // append initial circles
@@ -247,8 +249,8 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
         // updates x scale for new data
         yLinearScale = yScale(stateData, chosenYAxis);
 
-        // updates x axis with transition
-        yAxis = renderAxes(yLinearScale, xAxis);
+        // updates y axis with transition
+        yAxis = renderYAxes(yLinearScale, yAxis);
 
         // updates circles with new x and y values
         circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
