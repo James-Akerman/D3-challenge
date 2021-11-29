@@ -1,5 +1,5 @@
 var svgWidth = 1200;
-var svgHeight = 800;
+var svgHeight = 1000;
 
 var margin = {
   top: 20,
@@ -29,8 +29,8 @@ var chosenXAxis = "poverty";
 function xScale(stateData, chosenXAxis) {
   // create scales
   var xLinearScale = d3.scaleLinear()
-    .domain([d3.min(stateData, d => d[chosenXAxis]) * 0.9,
-      d3.max(stateData, d => d[chosenXAxis]) * 1.1
+    .domain([d3.min(stateData, d => d[chosenXAxis]) * 0.8,
+      d3.max(stateData, d => d[chosenXAxis]) * 1.2
     ])
     .range([0, width]);
 
@@ -98,39 +98,67 @@ function renderText(textGroup, newXScale, chosenXAxis) {
 }
 
 // function used for updating circles group with new tooltip
-function updateToolTip(chosenXAxis, circlesGroup) {
+function updateToolTip(chosenXAxis, chosenYAxis, textGroup) {
 
-  var label;
+  var xlabel;
+  var ylabel;
 
   if (chosenXAxis === "poverty") {
-    label = "In Poverty (%)";
+    xlabel = "Poverty: ";
   }
   else if (chosenXAxis === "age") {
-    label = "Age (Median)";
+    xlabel = "Age: ";
+  }
+  else if (chosenXAxis === "income") {
+    xlabel = "Household Income: ";
   }
   else {
-    label = "Lack of Household Income (Median)";
+    xlabel = " ";
+  };
+
+  if (chosenYAxis === "healthcare") {
+    ylabel = "Lacks Healthcare: ";
   }
+  else if (chosenYAxis === "obese") {
+    ylabel = "Obesity: ";
+  }
+  else {
+    ylabel = "Smokes: ";
+  };
 
   var toolTip = d3.tip()
     .attr("class", "tooltip")
-    .offset([80, -60])
+    .style("background-color", "black")
+    .style("color", "white")
+    .style("font-weight", "bold")
+    .style("padding", "10px")
     .html(function(d) {
-      return (`${d.poverty}<br>${label} ${d[chosenXAxis]}`);
+      var toolTipText;
+      if (chosenXAxis === "poverty"){
+        toolTipText = `${d.state}<br>${ylabel} ${d[chosenYAxis]}%<br>${xlabel} ${d[chosenXAxis]}%`;
+      }
+      if (chosenXAxis === "income"){
+        toolTipText = `${d.state}<br>${ylabel} ${d[chosenYAxis]}%<br>${xlabel} $${d[chosenXAxis]}`;
+      }
+      else{
+        toolTipText = `${d.state}<br>${ylabel} ${d[chosenYAxis]}%<br>${xlabel} ${d[chosenXAxis]}`;
+      }
+      return toolTipText;
     });
+    
 
-  circlesGroup.call(toolTip);
+  textGroup.call(toolTip);
 
-  circlesGroup.on("mouseover", function(data) {
+  textGroup.on("mouseover", function(data) {
     toolTip.show(data);
   })
     // onmouseout event
-    .on("mouseout", function(data, index) {
+    .on("mouseout", function(data) {
       toolTip.hide(data);
     });
 
-  return circlesGroup;
-}
+  return textGroup;
+};
 
 // Retrieve data from the CSV file and execute everything below
 d3.csv("assets/data/data.csv").then(function(stateData, err) {
@@ -171,9 +199,9 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
     .append("circle")
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
-    .attr("r", 15)
+    .attr("r", 20)
     .attr("fill", "#03a5fc")
-    .attr("opacity", "1")
+    .attr("opacity", "0,8")
     .style("stroke", "white");
 
   // Add label to each circle
@@ -222,10 +250,10 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
     .attr("x", 0 - (height / 2))
     .attr("dy", "1em")
     .classed("axis-text", true)
-    .text("Lack of Healthcare (%)");
+    .text("Lacks Healthcare (%)");
 
   // updateToolTip function above csv import
-  var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+  var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
   // x axis labels event listener
   xLabelsGroup.selectAll("text")
@@ -259,7 +287,7 @@ d3.csv("assets/data/data.csv").then(function(stateData, err) {
         textGroup = renderText(textGroup, xLinearScale, chosenXAxis);
 
         // updates tooltips with new info
-        circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+        circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
         // changes classes to change bold text
         if (chosenXAxis === "income") {
