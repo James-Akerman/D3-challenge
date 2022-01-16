@@ -1,8 +1,8 @@
 # Data Journalism
 
+## Overview of the Project
 This respository contains a webpage which uses D3.js create an interactive scatterplot of demographics for all 50 US states.
-
-Data can be compared across 6 different demographic criteria
+The data can be compared across 6 different demographic criteria
 
 ### Obsesity vs Poverty
 
