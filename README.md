@@ -44,13 +44,13 @@ Data can be compared across 6 different demographic criteria
 <br>
 
 ### Lack of Heathcare vs age
-![heathcare vs age](images/heathcare-vs-age.png)
+![healthcare vs age](images/healthcare-vs-age.png)
 
 <br>
 
 ### Lack of Heathcare vs Household Income
 
-![heathcare vs income](images/heathcare-vs-income.png)
+![healthcare vs income](images/healthcare-vs-income.png)
 
 <br>
 
