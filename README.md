@@ -39,12 +39,12 @@ Data can be compared across 6 different demographic criteria
 <br>
 
 ### Lack of Heathcare vs Poverty
-![healthcare vs poverty](images/healthcare-vs-poverty.png)
+![healthcare vs poverty](images/healthcare-vs-poverty.PNG)
 
 <br>
 
 ### Lack of Heathcare vs age
-![heathcare vs age](images/heathcare-vs-age.PNG)
+![heathcare vs age](images/heathcare-vs-age.png)
 
 <br>
 
