@@ -54,7 +54,7 @@ The data can be compared across 6 different demographic criteria
 
 <br>
 
-## Tools/Packages
+## Tools/Packages used
 - HTML
 - CSS
 - Javascript
