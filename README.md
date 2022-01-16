@@ -5,27 +5,31 @@ This respository contains a webpage which uses D3.js create an interactive scatt
 Data can be compared across 6 different demographic criteria
 
 ### Obsesity vs Poverty
-![obesity vs poverty](images/obesity-vs-poverty.PNG)
+
+![obesity vs poverty](images/obesity-vs-poverty.png)
 
 <br>
 
 ### Obsesity vs age
-![obesity vs age](images/obesity-vs-age.PNG)
+
+![obesity vs age](images/obesity-vs-age.png)
 
 <br>
 
 ### Obsesity vs Household Income
-![obesity vs income](images/obesity-vs-income.PNG)
+
+![obesity vs income](images/obesity-vs-income.png)
 
 <br>
 
 ### Smoking vs Poverty
-![smoking vs poverty](images/smoking-vs-poverty.PNG)
+
+![smoking vs poverty](images/smoking-vs-poverty.png)
 
 <br>
 
 ### Smoking vs age
-![smoking vs age](images/smoking-vs-age.PNG)
+![smoking vs age](images/smoking-vs-age.png)
 
 <br>
 
@@ -45,7 +49,8 @@ Data can be compared across 6 different demographic criteria
 <br>
 
 ### Lack of Heathcare vs Household Income
-![heathcare vs income](images/heathcare-vs-income.PNG)
+
+![heathcare vs income](images/heathcare-vs-income.png)
 
 <br>
 
