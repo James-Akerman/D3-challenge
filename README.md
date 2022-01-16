@@ -6,7 +6,7 @@ Data can be compared across 6 different demographic criteria
 
 ### Obsesity vs Poverty
 
-![obesity vs poverty](images/obesity-vs-poverty.png)
+![obesity vs poverty](images/obesity-vs-poverty.PNG)
 
 <br>
 
