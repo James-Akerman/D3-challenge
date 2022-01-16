@@ -1,9 +1,53 @@
 # Data Journalism
 
-### Background 
-In this Monash University Data Analytics Boot Camp/Trilogy Education Services homework, I imagined that I'd just accepted a data visualisation position for a major metro paper. I was tasked with analysing the current trends shaping people's lives, as well as creating charts, graphs, and interactive elements to help readers understand your findings.
+This respository contains a webpage which uses D3.js create an interactive scatterplot of demographics for all 50 US states.
 
-The editor wanted to run a series of feature stories about the health risks facing particular demographics. She was counting on me to sniff out the first story idea by sifting through information from the U.S. Census Bureau and the Behavioural Risk Factor Surveillance System.
+Data can be compared across 6 different demographic criteria
+
+### Obsesity vs Poverty
+[obesity vs poverty](images/obesity-vs-poverty.PNG)
+
+<br>
+
+### Obsesity vs age
+[obesity vs age](images/obesity-vs-age.PNG)
+
+<br>
+
+### Obsesity vs Household Income
+[obesity vs income](images/obesity-vs-income.PNG)
+
+<br>
+
+### Smoking vs Poverty
+[smoking vs poverty](images/smoking-vs-poverty.PNG)
+
+<br>
+
+### Smoking vs age
+[smoking vs age](images/smoking-vs-age.PNG)
+
+<br>
+
+### Smoking vs Household Income
+[smoking vs income](images/smoking-vs-income.PNG)
+
+<br>
+
+### Lack of Heathcare vs Poverty
+[healthcare vs poverty](images/healthcare-vs-poverty.PNG)
+
+<br>
+
+### Lack of Heathcare vs age
+[heathcare vs age](images/heathcare-vs-age.PNG)
+
+<br>
+
+### Lack of Heathcare vs Household Income
+[heathcare vs income](images/heathcare-vs-income.PNG)
+
+<br>
 
 ## Tools/Packages
 - HTML
@@ -11,7 +55,9 @@ The editor wanted to run a series of feature stories about the health risks faci
 - Javascript
   - D3.js
 
+<br>
+
 ## How to use
 - Download the respository
+- Go the the **D3_data_journalism** folder
 - Open Git Bash in the directory and type `python -m http.server` to launch the python server, then go to your local host, e.g `localhost:8000`.
-
