@@ -34,12 +34,12 @@ Data can be compared across 6 different demographic criteria
 <br>
 
 ### Smoking vs Household Income
-![smoking vs income](images/smoking-vs-income.PNG)
+![smoking vs income](images/smoking-vs-income.png)
 
 <br>
 
 ### Lack of Heathcare vs Poverty
-![healthcare vs poverty](images/healthcare-vs-poverty.PNG)
+![healthcare vs poverty](images/healthcare-vs-poverty.png)
 
 <br>
 
